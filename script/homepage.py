@@ -1,10 +1,17 @@
 import streamlit as st
-from script.multipage import MultiPage
-from script import homepage
+import numpy as np
+import matplotlib.pyplot as plt
 
-def main():
+def app():
 
-    st.title('ML sydrome prediction')
+    data = np.random.random([20,5])
+
+    fig = plt.figure(figsize = (10, 5))
+    plt.scatter(data[:,0],data[:,1])
+    
+    st.pyplot(fig)
+
+    '''st.title('ML sydrome prediction')
 
     with st.form(key='Model_form'):
         c11, c12 = st.columns(2)
@@ -29,17 +36,4 @@ def main():
 
     if (submitted):
         res = model()
-        st.write("Prediction is {}".format(res))
-
-app = MultiPage()
-
-st.title("Webiste for metabolic syndrome prediction[test ver.]")
-
-#mainPage = Page("Main", main)
-#secondPage = Page("Second", main)
-
-app.add_page("Homepage", homepage.app)
-app.add_page("Model-1", main)
-
-app.run()
-
+        st.write("Prediction is {}".format(res))'''

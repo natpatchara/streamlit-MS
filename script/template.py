@@ -1,9 +1,16 @@
 import streamlit as st
-from script.multipage import MultiPage
-from script import homepage
 
-def main():
+@st.cache(suppress_st_warning=True)
+def load_model(path):
+    pass
 
+@st.cache(suppress_st_warning=True)
+def predict(model, X):
+    return model.predict(X)
+
+def app():
+
+    path = ""
     st.title('ML sydrome prediction')
 
     with st.form(key='Model_form'):
@@ -24,22 +31,9 @@ def main():
         height = st.number_input('Enter a height(cm):', 120)
         submitted = st.form_submit_button('Submit')
 
-    def model(**arg):
-        return 0
-
     if (submitted):
-        res = model()
+
+        X = []
+        model = load_model(path)
+        res = predict(model, X)
         st.write("Prediction is {}".format(res))
-
-app = MultiPage()
-
-st.title("Webiste for metabolic syndrome prediction[test ver.]")
-
-#mainPage = Page("Main", main)
-#secondPage = Page("Second", main)
-
-app.add_page("Homepage", homepage.app)
-app.add_page("Model-1", main)
-
-app.run()
-
