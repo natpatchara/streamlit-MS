@@ -1,14 +1,17 @@
 import streamlit as st
+import pickle
 
 @st.cache(suppress_st_warning=True)
 def load_model(path):
-    pass
+    model = pickle.load(open('model.pkl','rb'))
+    return model
+
 
 @st.cache(suppress_st_warning=True)
 def predict(model, X):
     return model.predict(X)
 
-def app():
+def app(model):
 
     path = ""
     st.title('ML sydrome prediction')

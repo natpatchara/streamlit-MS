@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 
-def app():
+def app(model):
 
     data = np.random.random([20,5])
 

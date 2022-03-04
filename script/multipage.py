@@ -4,15 +4,23 @@
 '''
 
 import streamlit as st
+import pickle
 
 class MultiPage():
 
     def __init__(self):
 
         self.pages = []
+        self.model = None
 
-    def add_page(self, title, func):
-        self.pages.append({'title': title, 'func': func})
+    def add_page(self, title, func, path):
+        self.pages.append({'title': title, 'func': func, 'path': path})
+
+    @st.cache
+    def load_model(self, page):
+        print ("loading...")
+        model = pickle.load(open(page["path"],'rb'))
+        return model
 
     def run(self):
         page = st.sidebar.selectbox(
@@ -21,8 +29,9 @@ class MultiPage():
             format_func=lambda page: page["title"]
         )
 
+        self.model = self.load_model(page)
         # render the app function 
-        page["func"]()
+        page["func"](self.model)
 
 '''
 class Page():

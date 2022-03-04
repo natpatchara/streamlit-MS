@@ -1,6 +1,6 @@
 import streamlit as st
 
-def app():
+def app(model):
 
     st.title('ML sydrome prediction')
 
